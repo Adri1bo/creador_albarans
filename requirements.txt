@@ -2,6 +2,5 @@ streamlit
 numpy
 pandas
 fpdf
-streamlit-webrtc 
-opencv-python
+streamlit_qrcode_scanner
 qrcode[pil]
