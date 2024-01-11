@@ -1,5 +1,7 @@
 streamlit
 numpy
 pandas
-base64
 fpdf
+streamlit-webrtc 
+opencv-python
+qrcode[pil]
