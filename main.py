@@ -29,11 +29,12 @@ if accio == 'Crear':
         st.image('qr_code.png', caption='Codi QR', use_column_width=True)
 
 else:
+    if 'qr_code' not in st.session_state:
+        
+        st.session_state.qr_code = qrcode_scanner(key='qrcode_scanner')
     
-    qr_code = qrcode_scanner(key='qrcode_scanner')
-    
-    if qr_code:
-        st.write(qr_code)
+    else:
+        st.write(st.session_state.qr_code)
         
         # persist state of dataframe
 
