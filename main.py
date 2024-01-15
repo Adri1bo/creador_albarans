@@ -31,10 +31,11 @@ if accio == 'Crear':
 else:
     if 'qr_code' not in st.session_state:
         
-        st.session_state.qr_code = qrcode_scanner(key='qrcode_scanner')
+        qr_code = qrcode_scanner(key='qrcode_scanner')
+
     
     else:
-        st.write(st.session_state.qr_code)
+        st.write(st.session_state.qrcode_scanner)
         
         # persist state of dataframe
 
