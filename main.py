@@ -12,6 +12,9 @@ from fpdf import FPDF
 import base64
 import pandas as pd
 
+def qr_callback():
+    st.session_state.qrcode_id=st.session_state.qrcode_scanner
+
 accio=st.radio('Què vols fer?',['Crear','Llegir'])
 
 if accio == 'Crear':
@@ -29,12 +32,14 @@ if accio == 'Crear':
         st.image('qr_code.png', caption='Codi QR', use_column_width=True)
 
 else:
-    if 'qrcode_scanner' not in st.session_state:
+    if 'qrcode_id' not in st.session_state:
         
         qr_code = qrcode_scanner(key='qrcode_scanner')
+        #qr_code = st.slider('label',key='qrcode_scanner')
+        st.button('Comprovar',on_click=qr_callback)
     
     else:
-        st.write(st.session_state.qrcode_scanner)
+        st.write(st.session_state.qrcode_id)
         
         # persist state of dataframe
 
@@ -81,7 +86,7 @@ else:
             # Creating document
             pdf = FPDF("P", "mm", "A4")
             pdf.set_margins(left= 10, top= 10)
-            pdf.set_font("Helvetica", style= "B", size= 14)
+            pdf.set_font("Helvetica", style= "B", size= 12)
             pdf.set_text_color(r= 0, g= 0, b= 0)
             pdf.add_page()
             y_pos=20
