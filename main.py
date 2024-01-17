@@ -11,6 +11,32 @@ from streamlit_qrcode_scanner import qrcode_scanner
 from fpdf import FPDF
 import base64
 import pandas as pd
+import nfc
+
+def on_connect(tag):
+    st.write(f"Target connectat: {tag}")
+
+    # Llegir dades des de la targeta NFC
+    data = tag.read()
+
+    st.write(f"Dades llegides: {data}")
+
+def main():
+    st.title("Lectura NFC amb Streamlit")
+
+    # Crear un lector NFC
+    clf = nfc.ContactlessFrontend()
+
+    try:
+        # Esperar fins que una targeta NFC es detecti
+        clf.connect(rdwr={'on-connect': on_connect})
+    except KeyboardInterrupt:
+        pass
+    finally:
+        # Tanquar la connexió del lector NFC
+        clf.close()
+
+
 
 def qr_callback():
     st.session_state.qrcode_id=st.session_state.qrcode_scanner
@@ -106,3 +132,5 @@ else:
             html = create_download_link(pdf.output(dest="S").encode("latin-1"), "test")
 
             st.markdown(html, unsafe_allow_html=True)
+            
+    main()
