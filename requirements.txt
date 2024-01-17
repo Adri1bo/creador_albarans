@@ -4,3 +4,4 @@ pandas
 fpdf
 streamlit_qrcode_scanner
 qrcode[pil]
+nfcpy
